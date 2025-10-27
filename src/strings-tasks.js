@@ -57,7 +57,7 @@ function isString(value) {
  *   concatenateStrings('', 'bb') => 'bb'
  */
 function concatenateStrings(value1, value2) {
-  return value1 + value2;
+  return value1.concat(value2);
 }
 
 /**
@@ -72,7 +72,7 @@ function concatenateStrings(value1, value2) {
  *   getFirstChar('') => ''
  */
 function getFirstChar(value) {
-  return value[0] || '';
+  return value.charAt(0);
 }
 
 /**
@@ -153,7 +153,9 @@ function repeatString(str, times) {
  *   removeFirstOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
 function removeFirstOccurrences(str, value) {
-  return str.replace(value, '');
+  const i = str.indexOf(value);
+  if (i === -1 || value === '') return str;
+  return str.slice(0, i) + str.slice(i + value.length);
 }
 
 /**
@@ -187,9 +189,9 @@ function removeLastOccurrences(str, value) {
  *   sumOfCodes() => 0
  */
 function sumOfCodes(str) {
-  if (!str) return 0;
+  if (typeof str !== 'string') return 0;
   let sum = 0;
-  for (let i = 0; i < str.length; i + 1) {
+  for (let i = 0; i < str.length; i += 1) {
     sum += str.charCodeAt(i);
   }
   return sum;
